@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80" role="img" aria-label="Mini G-Wagon icon">
+  <defs>
+    <linearGradient id="bodyGrad" x1="0" x2="1">
+      <stop offset="0%" stop-color="#1f1f1f"/>
+      <stop offset="30%" stop-color="#303030"/>
+      <stop offset="60%" stop-color="#0f0f10"/>
+      <stop offset="100%" stop-color="#1b1b1d"/>
+    </linearGradient>
+    <linearGradient id="glassGrad" x1="0" x2="1">
+      <stop offset="0%" stop-color="#6e7a87"/>
+      <stop offset="100%" stop-color="#2f3740"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(0 4)">
+    <rect x="8" y="42" width="104" height="22" rx="8" fill="url(#bodyGrad)" stroke="#3e3f43" stroke-width="2.5"/>
+    <path d="M18 42 L32 24 H83 L97 42 Z" fill="url(#bodyGrad)" stroke="#3e3f43" stroke-width="2.5"/>
+    <path d="M35 26 H80 L86 42 H32 Z" fill="url(#glassGrad)" opacity="0.95"/>
+    <path d="M42 26 L57 18 H74 L89 26" fill="none" stroke="#8a9199" stroke-width="2" stroke-linecap="round"/>
+    <path d="M19 42 L12 52 H17" fill="none" stroke="#6b717a" stroke-width="2" stroke-linecap="round"/>
+    <path d="M100 42 L108 52 H102" fill="none" stroke="#6b717a" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="32" cy="63" r="10" fill="#15181d"/>
+    <circle cx="32" cy="63" r="5" fill="#d7dfe5"/>
+    <circle cx="88" cy="63" r="10" fill="#15181d"/>
+    <circle cx="88" cy="63" r="5" fill="#d7dfe5"/>
+    <path d="M48 43 H71" stroke="#8a9199" stroke-width="2" stroke-linecap="round"/>
+    <path d="M16 36 H27" stroke="#a9b2bb" stroke-width="2" stroke-linecap="round"/>
+    <path d="M95 35 H103" stroke="#a9b2bb" stroke-width="2" stroke-linecap="round"/>
+    <rect x="20" y="43" width="8" height="3" rx="1" fill="#edf2f7"/>
+    <rect x="95" y="43" width="8" height="3" rx="1" fill="#edf2f7"/>
+  </g>
+</svg>
