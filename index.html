@@ -155,6 +155,7 @@
       justify-content: center;
       z-index: 50;
       padding: 20px;
+      overflow-y: auto;
     }
 
     .modal-overlay.open {
@@ -164,6 +165,8 @@
     .modal-box {
       position: relative;
       width: min(420px, 90vw);
+      max-height: 90vh;
+      overflow-y: auto;
       background: #fff;
       border-radius: 16px;
       padding: 20px;
@@ -357,14 +360,16 @@
         max-width: 250px;
         -webkit-tap-highlight-color: transparent; /* Removes blue flash on mobile tap */
     ">
-        START G-WAGON 🟢
+        START 🟢
     </button>
+<div>
+        <img src="gwagon-pic.jpeg" alt="G-Wagon photo" class="image-placeholder" style="display: none; margin-top: 20px; border-radius: 8px;">
 
     <p id="surpriseMessage" style="display: none; margin-top: 20px; font-size: 1.1rem; color: #d63384;">
-        I always keep my promise :P
+       I always keep my promise :P
 
     </p>
-
+</div>
     
 </section>
          
@@ -381,7 +386,7 @@
         <div class="modal-box">
           <button class="close-btn" onclick="closeNote()" aria-label="Close note">×</button>
           <div class="gif-container">
-            <p>Hi Gagan,<br><br> Happy Birthday! I wanna wish you a life of love, laughter, and all the things that bring you joy! And I can't wait to beat you in pickleball!<br><br> Love,<br> Resh</p>
+            <p>Hi Gagan,<br><br> Happy Birthday to my favourite human! I wanna wish you a life of love, laughter, and all the things that bring you joy, but luckily you have me! <br><br> Love,<br> Resh</p>
             <p class="miss-you-text">P.S. Hope you enjoyed the gift cause that's all you're getting.</p>  
           </div>
         </div>
@@ -416,8 +421,26 @@
       document.body.classList.remove('gift-active');
     }
 
+    function resetGiftPopupState() {
+      const igniteBtn = document.getElementById('igniteBtn');
+      const message = document.getElementById('surpriseMessage');
+      const gWagonImage = document.querySelector('img[src="gwagon-pic.jpeg"]');
+
+      if (!igniteBtn || !message) return;
+
+      igniteBtn.innerHTML = 'START 🟢';
+      igniteBtn.style.background = 'linear-gradient(145deg, #1e1e1e, #000000)';
+      igniteBtn.style.color = '#00ff88';
+      igniteBtn.style.border = '2px solid #00ff88';
+      igniteBtn.style.boxShadow = '0 0 15px rgba(0, 255, 102, 0.2)';
+      message.style.display = 'none';
+      if (gWagonImage) gWagonImage.style.display = 'none';
+      message.textContent = 'I always keep my promise :P';
+    }
+
     function openPopup() {
       const popup = document.getElementById('gift-popup');
+      resetGiftPopupState();
       popup.classList.add('open');
       popup.setAttribute('aria-hidden', 'false');
       document.body.classList.add('gift-active');
@@ -426,7 +449,9 @@
     function closePopup() {
       const popup = document.getElementById('gift-popup');
       popup.classList.remove('open');
+      resetGiftPopupState();
       popup.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('gift-active');
     }
     function closeNote() {
       const popup = document.getElementById('note-popup');
@@ -468,28 +493,19 @@
      document.getElementById('igniteBtn').addEventListener('click', function() {
         var sound = document.getElementById('engineSound');
         var message = document.getElementById('surpriseMessage');
-        
-        // Play the engine sound effect
+        var gWagonImage = document.querySelector('img[src="gwagon-pic.jpeg"]');
+
         sound.play().catch(function(error) {
             console.log("Mobile browser blocked autoplay until interaction:", error);
         });
 
-        // Reveal the birthday text and update button UI
-        if (message.style.display === 'none') {
-            message.style.display = 'block';
-            //this.innerHTML = 'The G-Wagon I promised you hahaha!';
-            this.style.background = 'var(--accent-color)';
-            this.style.color = '#000';
-        }
-
-          // Update button UI and show the hidden card content
-        if (message.style.display === 'none') {
-            message.style.display = 'block';
-            this.innerHTML = 'ENGINE RUNNING 🏎️';
-            this.style.background = 'var(--accent-color)';
-            this.style.color = '#000';
-        }
-
+        message.style.display = 'block';
+        if (gWagonImage) gWagonImage.style.display = 'block';
+        this.innerHTML = 'ENGINE RUNNING 🏎️';
+        this.style.background = '#00ff88';
+        this.style.color = '#000';
+        this.style.border = '2px solid #00ff88';
+        this.style.boxShadow = '0 0 20px rgba(0, 255, 136, 0.5)';
     });
   
    
