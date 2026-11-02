@@ -44,6 +44,8 @@
       height: auto;
       user-select: none;
       opacity: 0;
+      --drift: 0px;
+      --spin: 720deg;
       animation: confetti-fall linear infinite;
       filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
       pointer-events: none;
@@ -58,7 +60,7 @@
         opacity: 1;
       }
       100% {
-        transform: translate3d(var(--drift, 0px), 110vh, 0) rotate(720deg) scale(1.1);
+        transform: translate3d(var(--drift, 0px), 110vh, 0) rotate(var(--spin, 720deg)) scale(1.1);
         opacity: 0;
       }
     }
@@ -327,12 +329,50 @@
       <button class="btn-gift" onclick="openPopup()">Gift 🎁</button>
       <button class="btn-gift" onclick="openNote()">Note</button>
 
+
+
+
+
       <div class="modal-overlay" id="gift-popup" aria-hidden="true">
         <div class="modal-box">
           <button class="close-btn" onclick="closePopup()" aria-label="Close gift">×</button>
+         <section class="card" style="text-align: center;">
+    <h2>Your key to happiness 🔑</h2>
+    
+    <!-- Audio element pointing to your local sound file -->
+    <audio id="engineSound" src="carEngine.mp3" preload="auto"></audio>
+
+    <button id="igniteBtn" style="
+        background: linear-gradient(145deg, #1e1e1e, #000000);
+        color: var(--accent-color);
+        border: 2px solid var(--accent-color);
+        padding: 15px 30px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+        transition: all 0.3s ease;
+        width: 100%;
+        max-width: 250px;
+        -webkit-tap-highlight-color: transparent; /* Removes blue flash on mobile tap */
+    ">
+        START G-WAGON 🟢
+    </button>
+
+    <p id="surpriseMessage" style="display: none; margin-top: 20px; font-size: 1.1rem; color: #d63384;">
+        I always keep my promise :P
+
+    </p>
+
+    
+</section>
+         
           <div class="gif-container">
             <img src="https://media.giphy.com/media/7Wcyq7KvKFNTO/giphy.gif" alt="Virtual Hug GIF">
           </div>
+              <!-- Interactive G-Wagon Ignition Card -->
+
         </div>
       </div>
 
@@ -342,13 +382,14 @@
           <button class="close-btn" onclick="closeNote()" aria-label="Close note">×</button>
           <div class="gif-container">
             <p>Hi Gagan,<br><br> Happy Birthday! I wanna wish you a life of love, laughter, and all the things that bring you joy! And I can't wait to beat you in pickleball!<br><br> Love,<br> Resh</p>
-            <p class="miss-you-text">P.S. Hope you enjoyed the gift cause that's all you're getting hehe!</p>  
+            <p class="miss-you-text">P.S. Hope you enjoyed the gift cause that's all you're getting.</p>  
           </div>
         </div>
       </div>
       
 
     </div>
+
 
     <div id="change-state" class="hidden-content">
       <div class="change-box">
@@ -408,20 +449,50 @@
         const car = document.createElement('img');
         car.classList.add('falling-car');
         car.src = 'gwagon-mini.svg';
-        //car.src = 'g-wagon.svg';
         car.alt = 'G-Wagon confetti';
 
         const drift = (Math.random() * 220 - 110) + 'px';
+        const spin = (Math.random() * 720 - 360) + 'deg';
         car.style.left = (Math.random() * 100) + 'vw';
         car.style.setProperty('--drift', drift);
+        car.style.setProperty('--spin', spin);
         car.style.animationDuration = (Math.random() * 2.3 + 2.4) + 's';
         car.style.animationDelay = (Math.random() * 3.5) + 's';
-        car.style.transform = 'rotate(' + (Math.random() * 180 - 90) + 'deg)';
         car.style.width = (Math.random() * 16 + 34) + 'px';
 
         container.appendChild(car);
       }
     }
+
+
+     document.getElementById('igniteBtn').addEventListener('click', function() {
+        var sound = document.getElementById('engineSound');
+        var message = document.getElementById('surpriseMessage');
+        
+        // Play the engine sound effect
+        sound.play().catch(function(error) {
+            console.log("Mobile browser blocked autoplay until interaction:", error);
+        });
+
+        // Reveal the birthday text and update button UI
+        if (message.style.display === 'none') {
+            message.style.display = 'block';
+            //this.innerHTML = 'The G-Wagon I promised you hahaha!';
+            this.style.background = 'var(--accent-color)';
+            this.style.color = '#000';
+        }
+
+          // Update button UI and show the hidden card content
+        if (message.style.display === 'none') {
+            message.style.display = 'block';
+            this.innerHTML = 'ENGINE RUNNING 🏎️';
+            this.style.background = 'var(--accent-color)';
+            this.style.color = '#000';
+        }
+
+    });
+  
+   
   </script>
 
 </body>
