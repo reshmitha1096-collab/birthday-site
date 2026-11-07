@@ -297,6 +297,37 @@
     .change-box h1 {
       margin-bottom: 0;
     }
+
+    .faq-item {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 8px;
+}
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.faq-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.faq-answer {
+  padding: 0 0 12px 0;
+  color: #555;
+  font-size: 0.95rem;
+}
   </style>
 </head>
 <body>
@@ -331,6 +362,7 @@
 
       <button class="btn-gift" onclick="openPopup()">Gift 🎁</button>
       <button class="btn-gift" onclick="openNote()">Note</button>
+      <button class="btn-gift" onclick="openFAQ()">FAQ</button>
 
 
 
@@ -381,13 +413,13 @@
         </div>
       </div>
 
-
+      <!-- Note Popup -->
       <div class="modal-overlay" id="note-popup" aria-hidden="true">
         <div class="modal-box">
           <button class="close-btn" onclick="closeNote()" aria-label="Close note">×</button>
           <div class="gif-container">
-            <p>Hi Gagan,<br><br> Happy Birthday to my favourite human! I wanna wish you a life of love, laughter, and all the things that bring you joy, but luckily you have me! <br><br> Love,<br> You-know-who</p>
-            <p class="miss-you-text">P.S. Hope you enjoyed the gift cause that's all you're getting.</p>  
+            <p><br> Happy Birthday to my favourite human! I wanna wish you a life of love, laughter, and all the things that bring you joy, but luckily you have me! And I miss you.<br> Love,<br> Resh</p>
+            <p class="miss-you-text">P.S. We should take more pictures together</p>  
           </div>
         </div>
       </div>
@@ -398,11 +430,73 @@
 
     <div id="change-state" class="hidden-content">
       <div class="change-box">
-        <h1>Knew ittttt.. Huhhhhh! You are such a bully!</h1>
+        <h1>Typical Gagan... Huhhhhh! You are such a bully!</h1>
         <button class="btn-gift" onclick="showBirthday()">Ok I changed my mind...</button>
       </div>
     </div>
   </div>
+
+  <!-- FAQ Modal Container -->
+<div id="faq-modal" class="modal-overlay" style="display: none;">
+  <div class="modal-box">
+    <button class="close-btn" onclick="closeFAQ()" aria-label="Close FAQ">×</button>
+    <h2>Frequently Asked Questions</h2>
+    
+    <div class="faq-accordion">
+      <!-- FAQ Item 1 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span>How did you make this?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer" style="display: none;">
+          <p>I used HTML and JS to create this. So no, I did not use a lame website builder.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span>Can I see the code?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer" style="display: none;">
+          <p>Maybe if you ask nicely :)</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 3 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span>Did you spend a lot of time on this?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer" style="display: none;">
+          <p>Of course not. I have a life.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span>Should I expect anything special?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer" style="display: none;">
+          <p>No, do not have any expectations!</p>
+        </div>
+      </div>
+        <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span>Should I thank you?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer" style="display: none;">
+          <p> Pfftttt... Stop itt. You know I can't take compliments!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   <script>
     function showBirthday() {
@@ -464,6 +558,34 @@
       popup.setAttribute('aria-hidden', 'false');
       document.body.classList.add('note-active');
     }
+function openFAQ() {
+      const faqContent = `
+        <h2>Frequently Asked Questions</h2>
+        <p><strong>Q1: How did you make this?</strong></p>
+        <p>A1: I used HTML, CSS, and JavaScript to create this interactive birthday card.</p>
+        <p><strong>Q2: Can I see the code?</strong></p>
+        <p>A2: Sure! The code is available in the source files of this project.</p>
+        <p><strong>Q3: Can I customize it for someone else?</strong></p>
+        <p>A3: Absolutely! You can change the images, text, and styles to personalize it.</p>
+      `;
+      const popup = document.createElement('div');
+      popup.classList.add('modal-overlay', 'open');
+      popup.innerHTML = `
+        <div class="modal-box">
+          <button class="close-btn" onclick="closeFAQ()" aria-label="Close FAQ">×</button>
+          ${faqContent}
+        </div>
+      `;
+      document.body.appendChild(popup);
+    }
+
+    function closeFAQ() {
+      const popup = document.querySelector('.modal-overlay.open');
+      if (popup) {
+        popup.remove();
+      }
+    }
+
 
     function startCarRain() {
       const container = document.getElementById('rain-box');
@@ -508,7 +630,34 @@
         this.style.boxShadow = '0 0 20px rgba(0, 255, 136, 0.5)';
     });
   
-   
+   // Open the pre-existing modal
+function openFAQ() {
+  const modal = document.getElementById('faq-modal');
+  if (modal) {
+    modal.style.display = 'flex';
+  }
+}
+
+
+// Toggle individual accordion items using DOM navigation
+function toggleFAQ(button) {
+  const answer = button.nextElementSibling;
+  const icon = button.querySelector('.faq-icon');
+  const isHidden = answer.style.display === 'none';
+
+  // Toggle display and icon
+  answer.style.display = isHidden ? 'block' : 'none';
+  icon.textContent = isHidden ? '−' : '+';
+}
+
+// Close the modal
+function closeFAQ() {
+  const modal = document.getElementById('faq-modal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
   </script>
 
 </body>
